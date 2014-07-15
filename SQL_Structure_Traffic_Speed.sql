@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 14, 2014 at 08:02 PM
+-- Generation Time: Jul 15, 2014 at 05:00 PM
 -- Server version: 5.5.37-cll
 -- PHP Version: 5.4.23
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `NYC_Traffic_Speed`
+-- Database: `tqrgpjyc_NYC_Traffic_Speed`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `Traffic_Speed` (
   `Speed` float NOT NULL,
   `TravelTime` float NOT NULL,
   `Status` varchar(3) NOT NULL,
-  `DataAsOf` varchar(22) NOT NULL,
+  `DataAsOf` datetime NOT NULL,
   `linkId` int(11) NOT NULL,
   `linkPoints` text NOT NULL,
   `EncodedPolyLine` text NOT NULL,
