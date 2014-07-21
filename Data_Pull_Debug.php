@@ -36,17 +36,22 @@ foreach ($Data_Rows as $New_Traffic_Data) {
 		
 		if(($Individual_Columns) && ($Date_Today<=$timestamp) && ($timestamp > $Timed['DataAsOf']) && ($Individual_Columns[3]==0)) { /* find out which ID is unique and add an extra check! */
 			foreach ($Individual_Columns as $Data_Columns) {
-				// echo $Data_Columns." | "; /* Outputs Each piece of data separated by a line for visual testing. */
+				echo $Data_Columns." | "; /* Outputs Each piece of data separated by a line for visual testing. */
 			}
 			echo $timestamp; /* Outputs Data of current row. (Used later to check if in DB) */
 			echo ":::";
 			echo $Timed['DataAsOf']; /* Outputs Most recent time which loop is checked against. */
+			echo "---";
+			if(!isset($Individual_Columns[12])) { $Individual_Columns[12] = ''; }
+			echo $Individual_Columns[12];
 			
-			mysqli_query($con,"INSERT INTO Traffic_Speed (Id, Speed, TravelTime, Status, DataAsOf, linkId, linkPoints, EncodedPolyLine, EncodedPolyLineLvls, Owner, Transcom_id, Borough, linkName) VALUES ($Individual_Columns[0], $Individual_Columns[1], $Individual_Columns[2], $Individual_Columns[3], '$timestamp', $Individual_Columns[5], '$Individual_Columns[6]', '$Individual_Columns[7]', '$Individual_Columns[8]', '$Individual_Columns[9]', $Individual_Columns[10], '$Individual_Columns[11]', '$Individual_Columns[12]')"); /* INSERT New data into the DB. */
+			//mysqli_query($con,"INSERT INTO Traffic_Speed (Id, Speed, TravelTime, Status, DataAsOf, linkId, linkPoints, EncodedPolyLine, EncodedPolyLineLvls, Owner, Transcom_id, Borough, linkName) VALUES ($Individual_Columns[0], $Individual_Columns[1], $Individual_Columns[2], $Individual_Columns[3], '$timestamp', $Individual_Columns[5], '$Individual_Columns[6]', '$Individual_Columns[7]', '$Individual_Columns[8]', '$Individual_Columns[9]', $Individual_Columns[10], '$Individual_Columns[11]', '$Individual_Columns[12]')"); /* INSERT New data into the DB. */
 			
 			echo "<br/>----- New Entry -----<br/>";
 		}
 	}
 }
+
+mysqli_close($con);
 
 ?>
