@@ -28,11 +28,14 @@ foreach ($Data_Rows as $New_Traffic_Data) {
 		$Individual_Columns = str_getcsv($New_Traffic_Data, "	", "\""); /* Breaks down data into individual columns separated by tabs between data in quotation. */		
 		$timestamp = strtotime($Individual_Columns[4]);
 		$timestamp = date("Y-m-d H:i:s", $timestamp); /* Convert Date & Time to TIMEDATE for MySQL ordering. */
-		
+		if(!isset($Individual_Columns[12])) { $Individual_Columns[12] = ''; }
+
 		if(($Individual_Columns) && ($Date_Today<=$timestamp) && ($timestamp > $Timed['DataAsOf']) && ($Individual_Columns[3]==0)) { /* find out which ID is unique and add an extra check! */
 			mysqli_query($con,"INSERT INTO Traffic_Speed (Id, Speed, TravelTime, Status, DataAsOf, linkId, linkPoints, EncodedPolyLine, EncodedPolyLineLvls, Owner, Transcom_id, Borough, linkName) VALUES ($Individual_Columns[0], $Individual_Columns[1], $Individual_Columns[2], $Individual_Columns[3], '$timestamp', $Individual_Columns[5], '$Individual_Columns[6]', '$Individual_Columns[7]', '$Individual_Columns[8]', '$Individual_Columns[9]', $Individual_Columns[10], '$Individual_Columns[11]', '$Individual_Columns[12]')"); /* INSERT New data into the DB. */
 		}
 	}
 }
+
+mysqli_close($con);
 
 ?>
